@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan daftar nasabah" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select norekening, nama, jeniskelamin, kontak, status, simpanan, pinjaman from nasabah order by right(norekening, 5) asc]]>
+	</queryString>
+	<field name="norekening" class="java.lang.String"/>
+	<field name="nama" class="java.lang.String"/>
+	<field name="jeniskelamin" class="java.lang.String"/>
+	<field name="kontak" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="simpanan" class="java.lang.Integer"/>
+	<field name="pinjaman" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DAFTAR NASABAH KOPERASI JEMBATAN KASIH]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="50" y="0" width="102" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="0" width="147" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="299" y="0" width="104" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="403" y="0" width="104" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="507" y="0" width="124" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="631" y="0" width="122" height="20" backcolor="#66FF33"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="50" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nomor Rekening]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Nasabah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kontak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="509" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah Simpanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="633" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah Pinjaman]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="507" y="0" width="124" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="0" width="102" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="299" y="0" width="104" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="0" width="147" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="403" y="0" width="104" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="631" y="0" width="122" height="20" backcolor="#FF9999"/>
+			</rectangle>
+			<textField>
+				<reportElement x="50" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{norekening}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="143" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jeniskelamin}=="Laki-Laki"?"Tn. " + $F{nama}:"Ny. " + $F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kontak}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="509" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Rp. " + DecimalFormat.getInstance().format($F{simpanan}).replace(",",".") + ",00"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="633" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Rp. " + DecimalFormat.getInstance().format($F{pinjaman}).replace(",",".") + ",00"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
