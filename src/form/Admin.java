@@ -1,9 +1,8 @@
 package form;
+
 import config.DBConnection;
 import java.io.File;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -13,21 +12,25 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+
 public class Admin extends javax.swing.JFrame {
+
     public String nama, tellerid;
     public String namaNasabah = null;
     public String statNasabah = null;
     public String IDNasabah = null;
+
     public Admin(String paranama, String paraid) {
         initComponents();
         FunctionClass.dateNow(lbHariIni);
-        FunctionClass.fillTableNasabah(tbNasabah);
+        //FunctionClass.fillTableNasabah(tbNasabah);
         tellerid = paraid;
         nama = paranama;
         callAllFunction();
         lbWelcome.setText("Selamat Datang, " + paranama);
     }
-    public void callAllFunction(){
+
+    public void callAllFunction() {
         btnChangeStatus.setEnabled(false);
         btnSeeTransaction.setEnabled(false);
         IDNasabah = null;
@@ -35,16 +38,17 @@ public class Admin extends javax.swing.JFrame {
         FunctionClass.fillTableNasabah(tbNasabah);
         FunctionClass.fillTableSimpanan(tbSimpanan);
         FunctionClass.fillTablePinjaman(tbPeminjaman);
-        
+        FunctionClass.fillTableJaminan(tbJaminan);
+
         FunctionClass.jumlahNasabahNonAktif(lbJumNasNonAktif);
         FunctionClass.jumlahNasabah(lbTotNas);
-        FunctionClass.jumlahNasabahAktif(lbJumNasAktif);        
+        FunctionClass.jumlahNasabahAktif(lbJumNasAktif);
         FunctionClass.totalSimpanan(lbTotSimpanan);
         FunctionClass.totalPinjaman(lbTotPeminjaman);
         FunctionClass.totalTransaksi(lbTotTransaksi);
         FunctionClass.totalPembayaran(lbTotPembayaran);
         FunctionClass.totalPengambilan(lbTotPengambilan);
-        
+
         FunctionClass.jumlahNasabahNonAktifTeller(lbJumNasNonAktifTeller, tellerid);
         FunctionClass.jumlahNasabahTeller(lbTotNasTeller, tellerid);
         FunctionClass.jumlahNasabahAktifTeller(lbJumNasAktifTeller, tellerid);
@@ -53,7 +57,7 @@ public class Admin extends javax.swing.JFrame {
         FunctionClass.totalTransaksiTeller(lbTotTransaksiTeller, tellerid);
         FunctionClass.totalPembayaranTeller(lbTotPembayaranTeller, tellerid);
         FunctionClass.totalPengambilanTeller(lbTotPengambilanTeller, tellerid);
-    }    
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -122,10 +126,15 @@ public class Admin extends javax.swing.JFrame {
         judulTransaksiPinjam = new javax.swing.JLabel();
         buatPinjaman = new javax.swing.JButton();
         bayarPinjaman = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbJaminan = new javax.swing.JTable();
+        judulTransaksiPinjam1 = new javax.swing.JLabel();
         lbLogout = new javax.swing.JLabel();
         lbWelcome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(750, 660));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(750, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,7 +180,8 @@ public class Admin extends javax.swing.JFrame {
 
         lbHariIni.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbHariIni.setText("jLabel14");
-        getContentPane().add(lbHariIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 160, 50));
+        lbHariIni.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(lbHariIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 240, 20));
 
         menuTab.setBackground(new java.awt.Color(102, 102, 102));
         menuTab.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -335,7 +345,7 @@ public class Admin extends javax.swing.JFrame {
         });
         menuTab_home.add(btnLaporanSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 120, 30));
 
-        menuTab.addTab("Home", menuTab_home);
+        menuTab.addTab("Dashboard", menuTab_home);
 
         menuTab_nasabah.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         menuTab_nasabah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -349,7 +359,7 @@ public class Admin extends javax.swing.JFrame {
                 btnSeeTransactionActionPerformed(evt);
             }
         });
-        menuTab_nasabah.add(btnSeeTransaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, 170, 30));
+        menuTab_nasabah.add(btnSeeTransaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, 165, 30));
 
         tbNasabah.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -370,7 +380,7 @@ public class Admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbNasabah);
 
-        menuTab_nasabah.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 440));
+        menuTab_nasabah.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 705, 440));
 
         judulNasabah.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         judulNasabah.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -386,7 +396,7 @@ public class Admin extends javax.swing.JFrame {
                 btnAddUserActionPerformed(evt);
             }
         });
-        menuTab_nasabah.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, 130, 30));
+        menuTab_nasabah.add(btnAddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, 135, 30));
 
         btnChangeStatus.setBackground(new java.awt.Color(255, 0, 0));
         btnChangeStatus.setForeground(new java.awt.Color(255, 255, 255));
@@ -396,9 +406,9 @@ public class Admin extends javax.swing.JFrame {
                 btnChangeStatusActionPerformed(evt);
             }
         });
-        menuTab_nasabah.add(btnChangeStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 160, 30));
+        menuTab_nasabah.add(btnChangeStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 155, 30));
 
-        menuTab.addTab("Daftar Nasabah", menuTab_nasabah);
+        menuTab.addTab("Data Nasabah", menuTab_nasabah);
 
         menuTab_simpanan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         menuTab_simpanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -416,7 +426,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tbSimpanan);
 
-        menuTab_simpanan.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 440));
+        menuTab_simpanan.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 705, 440));
 
         juduTransaksiSimpan.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         juduTransaksiSimpan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -444,7 +454,7 @@ public class Admin extends javax.swing.JFrame {
         });
         menuTab_simpanan.add(depositNasabah, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, 130, 30));
 
-        menuTab.addTab("Simpanan", menuTab_simpanan);
+        menuTab.addTab("Data Simpanan", menuTab_simpanan);
 
         menuTab_peminjaman.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         menuTab_peminjaman.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -462,7 +472,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tbPeminjaman);
 
-        menuTab_peminjaman.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 440));
+        menuTab_peminjaman.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 705, 440));
 
         judulTransaksiPinjam.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         judulTransaksiPinjam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -490,7 +500,32 @@ public class Admin extends javax.swing.JFrame {
         });
         menuTab_peminjaman.add(bayarPinjaman, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, 130, 30));
 
-        menuTab.addTab("Peminjaman", menuTab_peminjaman);
+        menuTab.addTab("Data Peminjaman", menuTab_peminjaman);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbJaminan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tbJaminan);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 705, 440));
+
+        judulTransaksiPinjam1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        judulTransaksiPinjam1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        judulTransaksiPinjam1.setText("Daftar Data Jaminan Peminjaman Nasabah");
+        jPanel1.add(judulTransaksiPinjam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 30));
+
+        menuTab.addTab("Data Jaminan", jPanel1);
 
         getContentPane().add(menuTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 730, 590));
 
@@ -523,23 +558,23 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeButtonActionPerformed
     private void lbLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogoutMouseClicked
         String[] options = {"Yes", "No"};
-        int x = JOptionPane.showOptionDialog(null, 
-                "Anda Akan Log Out", "Log Out?", JOptionPane.DEFAULT_OPTION, 
+        int x = JOptionPane.showOptionDialog(null,
+                "Anda Akan Log Out", "Log Out?", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        switch (x){
+        switch (x) {
             case 0:
                 JOptionPane.showMessageDialog(null, "Anda Telah Log Out", "Terima Kasih, " + nama, JOptionPane.INFORMATION_MESSAGE);
                 new Login().setVisible(true);
                 this.dispose();
                 break;
-            case 1:                
+            case 1:
                 break;
             default:
                 break;
         }
     }//GEN-LAST:event_lbLogoutMouseClicked
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
-        new addNasabah(nama,tellerid).setVisible(true);
+        new addNasabah(nama, tellerid).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddUserActionPerformed
     private void tbNasabahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNasabahMouseClicked
@@ -548,9 +583,9 @@ public class Admin extends javax.swing.JFrame {
         statNasabah = tbNasabah.getValueAt(baris, 3).toString();
         namaNasabah = tbNasabah.getValueAt(baris, 1).toString();
         System.out.println(statNasabah);
-        if(IDNasabah == null){
+        if (IDNasabah == null) {
             btnSeeTransaction.setEnabled(false);
-        }else{
+        } else {
             btnSeeTransaction.setEnabled(true);
             btnChangeStatus.setEnabled(true);
             tbNasabah.setToolTipText("User ID " + namaNasabah + " Selected");
@@ -608,20 +643,20 @@ public class Admin extends javax.swing.JFrame {
         //int baris = tbNasabah.getSelectedRow();
         new transaksiNasabah(nama, tellerid, IDNasabah).setVisible(true);
         tbNasabah.getSelectionModel().clearSelection();
-        transaksiNasabah.lbNamaNasabah.setText("Transaksi Atas Nama "+ namaNasabah);
+        transaksiNasabah.lbNamaNasabah.setText("Transaksi Atas Nama " + namaNasabah);
         tbNasabah.setToolTipText(null);
         btnSeeTransaction.setEnabled(false);
         this.dispose();
     }//GEN-LAST:event_btnSeeTransactionActionPerformed
     private void buatPinjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buatPinjamanActionPerformed
-        new transaksiSimpan(nama, tellerid).setVisible(true);
-        transaksiSimpan.judulTransaksi.setText("Transaksi Peminjaman");
-        transaksiSimpan.btnSimpan.setText("Pinjam");
+        new transaksiPeminjaman(nama, tellerid).setVisible(true);
+        transaksiPeminjaman.windowName.setText("Peminjaman");
+        //transaksiSimpan.btnSimpan.setText("Pinjam");
         this.dispose();
     }//GEN-LAST:event_buatPinjamanActionPerformed
     private void bayarPinjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayarPinjamanActionPerformed
         new transaksiSimpan(nama, tellerid).setVisible(true);
-        transaksiSimpan.judulTransaksi.setText("Transaksi Pembayaran");
+        transaksiSimpan.judulTransaksi.setText("Transaksi Pembayaran Kredit");
         transaksiSimpan.btnSimpan.setText("Bayar");
         this.dispose();
     }//GEN-LAST:event_bayarPinjamanActionPerformed
@@ -672,7 +707,7 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin("","").setVisible(true);
+                new Admin("", "").setVisible(true);
             }
         });
     }
@@ -703,13 +738,16 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel juduTransaksiSimpan;
     private javax.swing.JLabel judulNasabah;
     private javax.swing.JLabel judulStatistik;
     private javax.swing.JLabel judulTransaksiPinjam;
+    private javax.swing.JLabel judulTransaksiPinjam1;
     private javax.swing.JButton kreditNasabah;
     private javax.swing.JLabel lbHariIni;
     private javax.swing.JLabel lbJumNasAktif;
@@ -739,6 +777,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton minimizeButton;
     private javax.swing.JPanel panelTransaksi;
     private javax.swing.JPanel panelTransaksiTeller;
+    private javax.swing.JTable tbJaminan;
     private javax.swing.JTable tbNasabah;
     private javax.swing.JTable tbPeminjaman;
     private javax.swing.JTable tbSimpanan;

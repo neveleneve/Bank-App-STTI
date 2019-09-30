@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan transaksi nasabah" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan transaksi nasabah" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc5b3478-3d2a-4c8d-a703-e90547fbf39c">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="180"/>
@@ -18,7 +18,7 @@
 	<title>
 		<band height="71" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="71"/>
+				<reportElement x="0" y="0" width="802" height="71" uuid="b28c8d4d-638d-47e4-8664-81029005f885"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true" isUnderline="false"/>
 				</textElement>
@@ -29,14 +29,14 @@
 	<pageHeader>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="22" y="33" width="127" height="20"/>
+				<reportElement x="22" y="33" width="127" height="20" uuid="97192db5-87c2-4a24-8ea0-611b16001d4a"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nomor Rekening :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="163" y="33" width="100" height="20"/>
+				<reportElement x="163" y="33" width="100" height="20" uuid="d0e29265-ed1f-4bb5-9735-4427b4d5d2a8"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -47,42 +47,42 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<rectangle>
-				<reportElement x="103" y="0" width="102" height="20" forecolor="#000000" backcolor="#66FF33"/>
+				<reportElement x="103" y="0" width="102" height="20" forecolor="#000000" backcolor="#66FF33" uuid="3cba0b4c-cb6e-44d5-95fd-8985b9da27f2"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="205" y="0" width="104" height="20" forecolor="#000000" backcolor="#66FF33"/>
+				<reportElement x="205" y="0" width="104" height="20" forecolor="#000000" backcolor="#66FF33" uuid="77630b5f-6722-4760-a745-ea07f72ccadd"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="309" y="0" width="124" height="20" forecolor="#000000" backcolor="#66FF33"/>
+				<reportElement x="309" y="0" width="124" height="20" forecolor="#000000" backcolor="#66FF33" uuid="7bfb8fb9-e5df-47c0-9906-99c4fc5448f5"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="433" y="0" width="124" height="20" forecolor="#000000" backcolor="#66FF33"/>
+				<reportElement x="433" y="0" width="124" height="20" forecolor="#000000" backcolor="#66FF33" uuid="12a51537-afdd-48f9-8255-b09e1d1413dc"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="557" y="0" width="143" height="20" forecolor="#000000" backcolor="#66FF33"/>
+				<reportElement x="557" y="0" width="143" height="20" forecolor="#000000" backcolor="#66FF33" uuid="57a2fb89-3f73-4782-b537-006e0a489385"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="103" y="0" width="100" height="20"/>
+				<reportElement x="103" y="0" width="100" height="20" uuid="0e3f03a9-d30a-4dc3-8d6a-7b7a6f29b2a0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Kode Transaksi]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="207" y="0" width="100" height="20"/>
+				<reportElement x="207" y="0" width="100" height="20" uuid="4bdfe255-cd7a-4d02-8cfd-24a0ebdb8a73"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Tanggal Transaksi]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="311" y="0" width="120" height="20"/>
+				<reportElement x="311" y="0" width="120" height="20" uuid="8d71e029-89d6-4b75-b9ae-ffb822940e14"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Total Pinjaman]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="435" y="0" width="120" height="20"/>
+				<reportElement x="435" y="0" width="120" height="20" uuid="93740661-c518-4c5c-bdaf-d24676980bd6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Total Simpanan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="560" y="0" width="140" height="20"/>
+				<reportElement x="560" y="0" width="140" height="20" uuid="aed4febe-2d06-43a8-bb6a-f9b381366e5f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Keterangan]]></text>
 			</staticText>
@@ -91,42 +91,42 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<rectangle>
-				<reportElement x="557" y="0" width="143" height="20" forecolor="#000000" backcolor="#FF9999"/>
+				<reportElement x="557" y="0" width="143" height="20" forecolor="#000000" backcolor="#FF9999" uuid="8611b26a-e74d-4f4f-8eb5-195c91c9dd26"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="433" y="0" width="124" height="20" forecolor="#000000" backcolor="#FF9999"/>
+				<reportElement x="433" y="0" width="124" height="20" forecolor="#000000" backcolor="#FF9999" uuid="7c4c9c42-744c-4972-8d2a-be94d041652d"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="309" y="0" width="124" height="20" forecolor="#000000" backcolor="#FF9999"/>
+				<reportElement x="309" y="0" width="124" height="20" forecolor="#000000" backcolor="#FF9999" uuid="af08935c-b91d-42fb-bc04-cdac7983a681"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="205" y="0" width="104" height="20" forecolor="#000000" backcolor="#FF9999"/>
+				<reportElement x="205" y="0" width="104" height="20" forecolor="#000000" backcolor="#FF9999" uuid="c4602229-6684-4fc2-a534-848b585c2010"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="103" y="0" width="102" height="20" forecolor="#000000" backcolor="#FF9999"/>
+				<reportElement x="103" y="0" width="102" height="20" forecolor="#000000" backcolor="#FF9999" uuid="09116495-222f-4e3f-919c-22443d1adb37"/>
 			</rectangle>
 			<textField>
-				<reportElement x="105" y="0" width="98" height="20"/>
+				<reportElement x="105" y="0" width="98" height="20" uuid="297200fb-76c5-4147-94d5-34c3fe2c9057"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{kodetransaksi}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="207" y="0" width="100" height="20"/>
+				<reportElement x="207" y="0" width="100" height="20" uuid="ea18a58a-ae7e-4491-b533-37324a2474e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy", new Locale("in", "ID")).format($F{tanggaltransaksi})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="0" width="110" height="20"/>
+				<reportElement x="316" y="0" width="110" height="20" uuid="c59b5e10-af72-4f06-98b0-cc941ee43342"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Rp. " + DecimalFormat.getInstance().format($F{nominalpinjam}).replace(",",".") + ",00"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="110" height="20"/>
+				<reportElement x="440" y="0" width="110" height="20" uuid="94d04430-72bb-4849-9f7e-28858e1aade0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Rp. " + DecimalFormat.getInstance().format($F{nominalsimpan}).replace(",",".") + ",00"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="560" y="0" width="140" height="20"/>
+				<reportElement x="560" y="0" width="140" height="20" uuid="bdde81c4-4c39-4d4c-a61a-22e081a37b2a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>

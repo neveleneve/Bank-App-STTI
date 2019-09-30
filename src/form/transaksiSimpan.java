@@ -20,40 +20,42 @@ import javax.swing.JTextField;
  * @author NEVE
  */
 public class transaksiSimpan extends javax.swing.JFrame {
-    private String SQL;
+
+    public String SQL;
     public String tellerID, nama, idbaru;
     DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
     Calendar cal = Calendar.getInstance();
     Date tgl = new Date();
     public String kod = null;
+
     public transaksiSimpan(String paranama, String paraid) {
         initComponents();
         nama = paranama;
         tellerID = paraid;
     }
-    
-    public void KodeOtomatisDBSimpan(final String kode){
+
+    public void KodeOtomatisDBSimpan(final String kode) {
         String todayDate = dateFormat.format(tgl);
         java.sql.Connection conn = new DBConnection().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
             SQL = "select max(right(kodetransaksi, 5)) as jj from transaksisimpan";
             java.sql.ResultSet res = stmt.executeQuery(SQL);
-            while(res.next()){
-                if(res.first()==false){
-                    idbaru = kode+todayDate+"00001";
+            while (res.next()) {
+                if (res.first() == false) {
+                    idbaru = kode + todayDate + "00001";
                     txtKodeTransaksi.setText(idbaru);
                     txtKodeTransaksi.setEditable(false);
                     txtNoRekening.requestFocus();
-                }else{
+                } else {
                     res.last();
-                    int autoid = res.getInt("jj")+1;
+                    int autoid = res.getInt("jj") + 1;
                     String nomor = String.valueOf(autoid);
                     int noLong = nomor.length();
-                    for(int a = 0; a < 5 - noLong; a++){
+                    for (int a = 0; a < 5 - noLong; a++) {
                         nomor = "0" + nomor;
                     }
-                    idbaru = kode+todayDate+nomor;
+                    idbaru = kode + todayDate + nomor;
                     txtKodeTransaksi.setText(idbaru);
                     txtKodeTransaksi.setEditable(false);
                     txtNoRekening.requestFocus();
@@ -63,28 +65,29 @@ public class transaksiSimpan extends javax.swing.JFrame {
             System.out.println(e.getCause());
         }
     }
-    public void KodeOtomatisDBPinjam(final String kode){
+
+    public void KodeOtomatisDBPinjam(final String kode) {
         String todayDate = dateFormat.format(tgl);
         java.sql.Connection conn = new DBConnection().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
             SQL = "select max(right(kodetransaksi, 5)) as jj from transaksipeminjaman";
             java.sql.ResultSet res = stmt.executeQuery(SQL);
-            while(res.next()){
-                if(res.first()==false){
-                    idbaru = kod+todayDate+"00001";
+            while (res.next()) {
+                if (res.first() == false) {
+                    idbaru = kod + todayDate + "00001";
                     txtKodeTransaksi.setText(idbaru);
                     txtKodeTransaksi.setEditable(false);
                     txtNoRekening.requestFocus();
-                }else{
+                } else {
                     res.last();
-                    int autoid = res.getInt("jj")+1;
+                    int autoid = res.getInt("jj") + 1;
                     String nomor = String.valueOf(autoid);
                     int noLong = nomor.length();
-                    for(int a = 0; a < 5 - noLong; a++){
+                    for (int a = 0; a < 5 - noLong; a++) {
                         nomor = "0" + nomor;
                     }
-                    idbaru = kod+todayDate+nomor;
+                    idbaru = kod + todayDate + nomor;
                     txtKodeTransaksi.setText(idbaru);
                     txtKodeTransaksi.setEditable(false);
                     txtNoRekening.requestFocus();
@@ -94,8 +97,8 @@ public class transaksiSimpan extends javax.swing.JFrame {
             System.out.println(e.getCause());
         }
     }
-    
-    public void deposit(){
+
+    public void deposit() {
         java.sql.Connection conn = new DBConnection().connect();
         try {
             SQL = "insert into transaksisimpan values(?,?,?,?,?,?)";
@@ -116,26 +119,27 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Transaksi Deposit Tidak Berhasil. Silahkan Ulangi", "Transaksi Tidak Dapat Dilakukan", JOptionPane.WARNING_MESSAGE);
                 System.out.println(e);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void tambahSimpanan(final int nominal, final JTextField textrekening){
+
+    public void tambahSimpanan(final int nominal, final JTextField textrekening) {
         java.sql.Connection conn = new DBConnection().connect();
+        try {
+            SQL = "update nasabah set simpanan = simpanan + '" + nominal + "' where norekening='" + textrekening.getText() + "'";
+            java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
             try {
-                SQL = "update nasabah set simpanan = simpanan + '"+ nominal +"' where norekening='" + textrekening.getText() + "'";
-                java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
-                try {
-                    stmt.executeUpdate();
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-            } catch (Exception e) {
-            
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e);
             }
+        } catch (SQLException e) {
+
+        }
     }
-    
-    public void kredit(){
+
+    public final void kredit() {
         java.sql.Connection conn = new DBConnection().connect();
         try {
             SQL = "insert into transaksisimpan values(?,?,?,?,?,?)";
@@ -156,26 +160,27 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Transaksi Pengambilan Tidak Berhasil. Silahkan Ulangi", "Transaksi Tidak Dapat Dilakukan", JOptionPane.WARNING_MESSAGE);
                 System.out.println(e);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void kurangSimpanan(final int nominal, final JTextField textrekening){
+
+    public void kurangSimpanan(final int nominal, final JTextField textrekening) {
         java.sql.Connection conn = new DBConnection().connect();
+        try {
+            SQL = "update nasabah set simpanan = simpanan - '" + nominal + "' where norekening='" + textrekening.getText() + "'";
+            java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
             try {
-                SQL = "update nasabah set simpanan = simpanan - '"+ nominal +"' where norekening='" + textrekening.getText() + "'";
-                java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
-                try {
-                    stmt.executeUpdate();
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-            } catch (Exception e) {
-            
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e);
             }
+        } catch (SQLException e) {
+
+        }
     }
-    
-    public void pinjam(){
+
+    public void pinjam() {
         java.sql.Connection conn = new DBConnection().connect();
         try {
             SQL = "insert into transaksipeminjaman values(?,?,?,?,?,?)";
@@ -196,26 +201,27 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Transaksi Peminjaman Tidak Berhasil. Silahkan Ulangi", "Transaksi Tidak Dapat Dilakukan", JOptionPane.WARNING_MESSAGE);
                 System.out.println(e);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void tambahPinjaman(final int nominal, final JTextField textrekening){
+
+    public void tambahPinjaman(final int nominal, final JTextField textrekening) {
         java.sql.Connection conn = new DBConnection().connect();
+        try {
+            SQL = "update nasabah set pinjaman = pinjaman + '" + nominal + "' where norekening='" + textrekening.getText() + "'";
+            java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
             try {
-                SQL = "update nasabah set pinjaman = pinjaman + '"+ nominal +"' where norekening='" + textrekening.getText() + "'";
-                java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
-                try {
-                    stmt.executeUpdate();
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-            } catch (Exception e) {
-            
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e);
             }
+        } catch (SQLException e) {
+
+        }
     }
-    
-    public void bayar(){
+
+    public void bayar() {
         java.sql.Connection conn = new DBConnection().connect();
         try {
             SQL = "insert into transaksipeminjaman values(?,?,?,?,?,?)";
@@ -236,43 +242,45 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Transaksi Pembayaran Tidak Berhasil. Silahkan Ulangi", "Transaksi Tidak Dapat Dilakukan", JOptionPane.WARNING_MESSAGE);
                 System.out.println(e);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public void kurangPinjaman(final int nominal, final JTextField textrekening){
-        java.sql.Connection conn = new DBConnection().connect();
-            try {
-                SQL = "update nasabah set pinjaman = pinjaman - '"+ nominal +"' where norekening='" + textrekening.getText() + "'";
-                java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
-                try {
-                    stmt.executeUpdate();
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-            } catch (Exception e) {
-            
-            }
-    }
-    
-    public void cekNoRek(){
+
+    public void kurangPinjaman(final int nominal, final JTextField textrekening) {
         java.sql.Connection conn = new DBConnection().connect();
         try {
-                SQL = "select * from nasabah where binary norekening = ?";
-                java.sql.PreparedStatement nimstate = conn.prepareStatement(SQL);
-                nimstate.setString(1, txtNoRekening.getText());
-                ResultSet nimrs = nimstate.executeQuery();
-                if(nimrs.next()){
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "Nomor Rekening Tidak Ada Di Database", "Error", JOptionPane.ERROR_MESSAGE);
-                    txtNoRekening.setText("");
-                    txtNoRekening.requestFocus();
-                }    
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+            SQL = "update nasabah set pinjaman = pinjaman - '" + nominal + "' where norekening='" + textrekening.getText() + "'";
+            java.sql.PreparedStatement stmt = conn.prepareStatement(SQL);
+            try {
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e);
             }
+        } catch (SQLException e) {
+
+        }
     }
+
+    public void cekNoRek() {
+        java.sql.Connection conn = new DBConnection().connect();
+        try {
+            SQL = "select * from nasabah where binary norekening = ?";
+            java.sql.PreparedStatement nimstate = conn.prepareStatement(SQL);
+            nimstate.setString(1, txtNoRekening.getText());
+            ResultSet nimrs = nimstate.executeQuery();
+            if (nimrs.next()) {
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Nomor Rekening Tidak Ada Di Database", "Error", JOptionPane.ERROR_MESSAGE);
+                txtNoRekening.setText("");
+                txtNoRekening.requestFocus();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -357,7 +365,7 @@ public class transaksiSimpan extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nomor Rekening");
+        jLabel2.setText("Nomor Anggota");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 220, 30));
 
         txtNoRekening.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -370,7 +378,7 @@ public class transaksiSimpan extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Nominal");
+        jLabel3.setText("Nominal Simpan");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 220, 30));
 
         txtNominal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -414,10 +422,6 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 kurangSimpanan(Integer.valueOf(txtNominal.getText()), txtNoRekening);
                 kredit();
                 break;
-            case "Pinjam":
-                tambahPinjaman(Integer.valueOf(txtNominal.getText()), txtNoRekening);
-                pinjam();
-                break;
             case "Bayar":
                 kurangPinjaman(Integer.valueOf(txtNominal.getText()), txtNoRekening);
                 bayar();
@@ -427,10 +431,10 @@ public class transaksiSimpan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
     private void txtNoRekeningFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNoRekeningFocusLost
-        if(txtNoRekening.getText().equals("")){
-            
-        }else{
-            String id = new String(txtNoRekening.getText());
+        if (txtNoRekening.getText().equals("")) {
+
+        } else {
+            String id = txtNoRekening.getText();
             StringBuilder capsId = new StringBuilder(id);
             capsId.setCharAt(0, Character.toUpperCase(capsId.charAt(0)));
             txtNoRekening.setText(capsId.toString());
@@ -449,11 +453,6 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 Admin.menuTab.setSelectedIndex(2);
                 this.dispose();
                 break;
-            case "Pinjam":
-                new Admin(nama, tellerID).setVisible(true);
-                Admin.menuTab.setSelectedIndex(3);
-                this.dispose();
-                break;
             case "Bayar":
                 new Admin(nama, tellerID).setVisible(true);
                 Admin.menuTab.setSelectedIndex(3);
@@ -461,7 +460,7 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 break;
             default:
                 break;
-        }    
+        }
     }//GEN-LAST:event_btnCancelActionPerformed
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
@@ -474,12 +473,8 @@ public class transaksiSimpan extends javax.swing.JFrame {
                 kod = "T";
                 KodeOtomatisDBSimpan(kod);
                 break;
-            case "Pinjam":
-                kod="P";
-                KodeOtomatisDBPinjam(kod);
-                break;
             case "Bayar":
-                kod="B";
+                kod = "B";
                 KodeOtomatisDBPinjam(kod);
                 break;
             default:
@@ -513,7 +508,7 @@ public class transaksiSimpan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new transaksiSimpan("","").setVisible(true);
+                new transaksiSimpan("", "").setVisible(true);
             }
         });
     }
